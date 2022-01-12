@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        anim = GetComponent<Animator>();    
+        anim = GetComponent<Animator>();
     }
 
     void OnCollisionEnter(Collision other)
@@ -75,8 +75,8 @@ public class PlayerController : MonoBehaviour
         Move();
         Animate();
 
-        Debug.Log(Joystick.Direction);
-
         OrbitalRotate();
     }   
 }
+
+
