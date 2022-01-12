@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     bool isMoving;
     bool isJumping;
 
+    public FloatingJoystick Joystick;
+
     void Start()
     {
         anim = GetComponent<Animator>();    
@@ -26,18 +28,14 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        Vector2 movement = Joystick.Direction;
+
+        if (movement != Vector2.zero)
         {
             isMoving = true;
 
-            if (Input.GetKey(KeyCode.W))
-                transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-            if (Input.GetKey(KeyCode.S))
-                transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
-            if (Input.GetKey(KeyCode.A))
-                transform.Rotate(Vector3.down * turnSpeed * Time.deltaTime);
-            if (Input.GetKey(KeyCode.D))
-                transform.Rotate(Vector3.up * turnSpeed * Time.deltaTime);
+            transform.Translate(new Vector3(0, 0, movement.y) * moveSpeed * Time.deltaTime);
+            transform.Rotate(new Vector3(0, movement.x, 0) * turnSpeed * Time.deltaTime);   
         }
         else
             isMoving = false;
@@ -47,11 +45,6 @@ public class PlayerController : MonoBehaviour
             GetComponent<Rigidbody>().AddForce(transform.up * jumpSpeed);
             isJumping = true;
         }
-    }
-
-    void Jump()
-    {
-
     }
 
     void Animate()
@@ -77,11 +70,12 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rot, 50 * Time.deltaTime);
     }
 
-    void FixedUpdate()
+    void Update()
     {
         Move();
-        Jump();
         Animate();
+
+        Debug.Log(Joystick.Direction);
 
         OrbitalRotate();
     }   
