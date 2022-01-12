@@ -9,39 +9,80 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed = 10;
 
     public Transform targetPlanet;
+    Animator anim;
 
-    bool canJump;
+    bool isMoving;
+    bool isJumping;
 
-    void OnCollisionStay(Collision other)
+    void Start()
     {
-        canJump = true;
+        anim = GetComponent<Animator>();    
     }
 
-    void FixedUpdate()
+    void OnCollisionEnter(Collision other)
     {
-        if (Input.GetKey(KeyCode.W))
-            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+        isJumping = false;
+    }
 
-        if (Input.GetKey(KeyCode.S))
-            transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
+    void Move()
+    {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
+            isMoving = true;
 
-        if (Input.GetKey(KeyCode.A))
-            transform.Rotate(Vector3.down * turnSpeed * Time.deltaTime);
-
-        if (Input.GetKey(KeyCode.D))
-            transform.Rotate(Vector3.up * turnSpeed * Time.deltaTime);
-
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+            if (Input.GetKey(KeyCode.W))
+                transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.S))
+                transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.A))
+                transform.Rotate(Vector3.down * turnSpeed * Time.deltaTime);
+            if (Input.GetKey(KeyCode.D))
+                transform.Rotate(Vector3.up * turnSpeed * Time.deltaTime);
+        }
+        else
+            isMoving = false;
+        
+        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
             GetComponent<Rigidbody>().AddForce(transform.up * jumpSpeed);
-            canJump = false;
+            isJumping = true;
         }
+    }
 
+    void Jump()
+    {
+
+    }
+
+    void Animate()
+    {
+        if (isMoving)
+            anim.SetBool("Walk", true);
+        else
+            anim.SetBool("Walk", false);
+
+        if (isJumping)
+            anim.SetBool("Jump", true);
+        else
+            anim.SetBool("Jump", false);
+    }
+
+    void OrbitalRotate()
+    {
         Vector3 direction = (transform.position - targetPlanet.position).normalized;
         Vector3 localUp = transform.up;
 
         Quaternion rot = Quaternion.FromToRotation(localUp, direction) * transform.rotation;
 
         transform.rotation = Quaternion.Slerp(transform.rotation, rot, 50 * Time.deltaTime);
+    }
+
+    void FixedUpdate()
+    {
+        Move();
+        Jump();
+        Animate();
+
+        OrbitalRotate();
     }   
 }
