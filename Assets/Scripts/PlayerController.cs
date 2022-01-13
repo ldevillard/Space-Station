@@ -25,10 +25,22 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other) 
     {
+        if (other.tag == "Jump" && canJump)
+        {
+            isJumping = true;
+            GetComponent<Rigidbody>().AddForce(transform.up * jumpSpeed);
+            StartCoroutine(DoneJump());
+
+            AudioManager.Mine.Jump_SFX();
+        }
+    }
+
+    IEnumerator DoneJump()
+    {
+        yield return new WaitForSeconds(0.5f);
         isJumping = false;
-        canJump = true;
     }
 
     void Move()
@@ -83,9 +95,27 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rot, rotGravitySpeed * Time.deltaTime);
     }
 
+    void Jump()
+    {
+        Debug.DrawRay(transform.position, -transform.up * 5, Color.magenta);
+        Ray ray = new Ray(transform.position, -transform.up);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit) && hit.collider.tag == "Planet")
+        {
+            Debug.Log(hit.distance);
+            if (hit.distance < 2f)
+            {
+                canJump = true;
+            }
+        }
+    }
+
     void Update()
     {
         Move();
+        Jump();
+
         Animate();
         OrbitalRotate();
     }

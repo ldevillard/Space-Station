@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Planet
   - OrbitalCam
+  - FxTemporaire
+  - Jump
   layers:
   - Default
   - TransparentFX
