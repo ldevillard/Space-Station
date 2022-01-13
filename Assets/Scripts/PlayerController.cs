@@ -12,21 +12,17 @@ public class PlayerController : MonoBehaviour
     public Transform targetPlanet;
     Animator anim;
 
-    bool isMoving;
+    static public bool isMoving;
     bool isJumping;
     bool canJump;
 
     public FloatingJoystick Joystick;
 
-    public RawImage Fade; //Making camera fading while idling
-    bool countStarted;
-    bool canFade;
+    float rotGravitySpeed;
 
     void Start()
     {
         anim = GetComponent<Animator>();
-
-        Fade.color = new Color(Fade.color.r, Fade.color.g, Fade.color.b, 1);
     }
 
     void OnCollisionEnter(Collision other)
@@ -74,67 +70,26 @@ public class PlayerController : MonoBehaviour
 
     void OrbitalRotate()
     {
+        if (canJump)
+            rotGravitySpeed = 20;
+        else
+            rotGravitySpeed = 3;
+
         Vector3 direction = (transform.position - targetPlanet.position).normalized;
         Vector3 localUp = transform.up;
 
         Quaternion rot = Quaternion.FromToRotation(localUp, direction) * transform.rotation;
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, rot, 3 * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rot, rotGravitySpeed * Time.deltaTime);
     }
 
     void Update()
     {
         Move();
         Animate();
-
-        FadeController();
-
         OrbitalRotate();
     }
 
-    void FadeController()
-    {
-        if (!isMoving && !isJumping)
-        {
-            if (!countStarted)
-            {
-                countStarted = true;
-                StartCoroutine(WaitingToFade());
-            }
-        }
-        else
-        {
-            canFade = false;
-            if (countStarted)
-            {
-                countStarted = false;
-                StopCoroutine(WaitingToFade());
-            }
-        }
-
-        if (canFade)
-            FadeIn();
-        else
-            FadeOut();
-    }
-
-    void FadeOut()
-    {
-        //Debug.Log("FadeOut");
-        Fade.color = Color.Lerp(Fade.color, new Color(Fade.color.r, Fade.color.g, Fade.color.b, 1), 10 * Time.deltaTime);
-    }
-
-    void FadeIn()
-    {
-        //Debug.Log("FadeIn");
-        Fade.color = Color.Lerp(Fade.color, new Color(Fade.color.r, Fade.color.g, Fade.color.b, 0), 10 * Time.deltaTime);
-    }
-
-    IEnumerator WaitingToFade()
-    {
-        yield return new WaitForSeconds(5);
-        canFade = true;
-    }
 }
 
 
