@@ -12,10 +12,15 @@ public class AudioManager : MonoBehaviour
     }
 
     public AudioSource Music, SFX;
-    public AudioClip Jump;
+    public AudioClip Jump, Key;
 
     public void Jump_SFX()
     {
         SFX.PlayOneShot(Jump);
+    }
+
+    public void KeyTaken_SFX()
+    {
+        SFX.PlayOneShot(Key);
     }
 }
