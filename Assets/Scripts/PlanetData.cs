@@ -21,6 +21,7 @@ public class PlanetData : MonoBehaviour
 
     void Awake()
     {
+        RandomSize();
         RandomTexture();
         Jump.SetActive(false);
     }
@@ -39,5 +40,19 @@ public class PlanetData : MonoBehaviour
     public void RandomTexture()
     {
         GetComponent<MeshFilter>().mesh = Textures[Random.Range(0, Textures.Length)];
+    }
+
+    public void RandomSize()
+    {
+        int i = Random.Range(0, 4);
+
+        if (i == 0)
+            transform.localScale = new Vector3(18, 18, 18);
+        else if (i == 1)
+            transform.localScale = new Vector3(20, 20, 20);
+        else if (i == 2)
+            transform.localScale = new Vector3(22, 22, 22);
+        else if (i == 3)
+            transform.localScale = new Vector3(24, 24, 24);
     }
 }
