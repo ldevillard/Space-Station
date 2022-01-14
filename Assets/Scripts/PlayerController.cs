@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit) && hit.collider.tag == "Planet")
         {
-            Debug.Log(hit.distance);
+            //Debug.Log(hit.distance);
             if (hit.distance < 2f)
             {
                 canJump = true;

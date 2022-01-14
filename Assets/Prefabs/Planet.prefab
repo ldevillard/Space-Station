@@ -209,6 +209,7 @@ MonoBehaviour:
   - {fileID: 123557761520472508, guid: 5b91078dc74097a4c8c75642466e2e0b, type: 3}
   - {fileID: 7118544566075976791, guid: 6b6ed7cd4dd0e3d4da092551260316d5, type: 3}
   key: {fileID: 8394557904187699076}
+  ID: 
 --- !u!1 &4135293789453096550
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,6 +506,18 @@ PrefabInstance:
     - target: {fileID: 4159976647224570, guid: b0bc1b6b391734647b9bb142bafc0819, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159976647224570, guid: b0bc1b6b391734647b9bb142bafc0819, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159976647224570, guid: b0bc1b6b391734647b9bb142bafc0819, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159976647224570, guid: b0bc1b6b391734647b9bb142bafc0819, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 4159976647224570, guid: b0bc1b6b391734647b9bb142bafc0819, type: 3}
       propertyPath: m_LocalPosition.x

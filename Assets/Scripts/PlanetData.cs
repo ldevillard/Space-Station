@@ -8,13 +8,21 @@ public class PlanetData : MonoBehaviour
     public Mesh[] Textures;
     public Key key;
 
-    public string Tag;
+    public string ID;
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.collider.tag == "Player")
+        {
+            //Debug.Log(ID);    
+            GameManager.Mine.Generate(ID);
+        }
+    }
 
     void Awake()
     {
+        RandomTexture();
         Jump.SetActive(false);
-        /*Random Planet*/
-        GetComponent<MeshFilter>().mesh = Textures[Random.Range(0, Textures.Length)];
     }
 
     public void PlanetDone()
@@ -26,5 +34,10 @@ public class PlanetData : MonoBehaviour
     {
         Jump.SetActive(true);
         key.gameObject.SetActive(false);
+    }
+
+    public void RandomTexture()
+    {
+        GetComponent<MeshFilter>().mesh = Textures[Random.Range(0, Textures.Length)];
     }
 }
