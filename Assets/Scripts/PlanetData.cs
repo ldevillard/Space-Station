@@ -10,6 +10,8 @@ public class PlanetData : MonoBehaviour
 
     public string ID;
 
+    public GameObject[] Obstacles;
+
     void OnCollisionEnter(Collision other)
     {
         if (other.collider.tag == "Player")
@@ -23,12 +25,18 @@ public class PlanetData : MonoBehaviour
     {
         RandomSize();
         RandomTexture();
+        if (GameManager.Mine.nbrPlanetSpawned > 0)
+            RandomObstacle();
+        
         Jump.SetActive(false);
+
+        GameManager.Mine.nbrPlanetSpawned++;
     }
 
     public void PlanetDone()
     {
         Jump.SetActive(true);
+        //Make arrow point to jump
     }
 
     public void FirstPlanet()
@@ -37,12 +45,12 @@ public class PlanetData : MonoBehaviour
         key.gameObject.SetActive(false);
     }
 
-    public void RandomTexture()
+    void RandomTexture()
     {
         GetComponent<MeshFilter>().mesh = Textures[Random.Range(0, Textures.Length)];
     }
 
-    public void RandomSize()
+    void RandomSize()
     {
         int i = Random.Range(0, 4);
 
@@ -54,5 +62,11 @@ public class PlanetData : MonoBehaviour
             transform.localScale = new Vector3(22, 22, 22);
         else if (i == 3)
             transform.localScale = new Vector3(24, 24, 24);
+    }
+
+    void RandomObstacle()
+    {
+        int i = Random.Range(0, Obstacles.Length);
+        Instantiate(Obstacles[i], transform);
     }
 }

@@ -8,6 +8,7 @@ TagManager:
   - OrbitalCam
   - FxTemporaire
   - Jump
+  - Obstacle
   layers:
   - Default
   - TransparentFX

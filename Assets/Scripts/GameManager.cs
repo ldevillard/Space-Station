@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     string currentID;
 
+    public int nbrPlanetSpawned;
+
     void Awake()
     {
         Application.targetFrameRate = 60;
@@ -20,12 +22,15 @@ public class GameManager : MonoBehaviour
     {
         Mine = this;
 
+        nbrPlanetSpawned = 0;
+        
         Planets[0] = Instantiate(PlanetPrefab, Vector3.zero, new Quaternion());
         Planets[0].GetComponent<PlanetData>().FirstPlanet();
         Planets[0].GetComponent<PlanetData>().ID = "first";
 
         Planets[1] = Instantiate(PlanetPrefab, new Vector3(0, 100, 0), new Quaternion(0, 0, 180, 0));
         Planets[1].GetComponent<PlanetData>().ID = "second";
+
     }
 
     public void Generate(string id)

@@ -226,6 +226,8 @@ MonoBehaviour:
   - {fileID: -5129659489156297895, guid: c5a2fbe0e075997499ecb3274b33b354, type: 3}
   key: {fileID: 8394557904187699076}
   ID: 
+  Obstacles:
+  - {fileID: 3325186425132175996, guid: 729641a514b2e9f41a1192aa5e5611f1, type: 3}
 --- !u!1 &4135293789453096550
 GameObject:
   m_ObjectHideFlags: 0
