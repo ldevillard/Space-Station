@@ -14189,8 +14189,6 @@ GameObject:
   - component: {fileID: 199979416329716090}
   - component: {fileID: 6566301838168473910}
   - component: {fileID: 5561760725027804021}
-  - component: {fileID: 1732683145765633643}
-  - component: {fileID: 5673321922141082977}
   m_Layer: 0
   m_Name: JumpBoost
   m_TagString: Jump
@@ -18886,33 +18884,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.25, y: 0.25, z: 2}
   m_Center: {x: 0, y: 0, z: 0.9565455}
---- !u!114 &1732683145765633643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1727626132299242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db112c2cfbc73ad45819d6140701f259, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5673321922141082977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1727626132299242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39ec1892eeb838e4c8baa5e3bab8f7bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 1
-  waypointController: {fileID: 0}
-  waypointNumber: 0
 --- !u!1 &1930125201661818
 GameObject:
   m_ObjectHideFlags: 0

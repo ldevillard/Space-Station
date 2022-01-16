@@ -9,6 +9,7 @@ TagManager:
   - FxTemporaire
   - Jump
   - Obstacle
+  - Arrow
   layers:
   - Default
   - TransparentFX

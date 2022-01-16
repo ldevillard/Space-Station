@@ -36,7 +36,6 @@ public class PlanetData : MonoBehaviour
     public void PlanetDone()
     {
         Jump.SetActive(true);
-        //Make arrow point to jump
     }
 
     public void FirstPlanet()
